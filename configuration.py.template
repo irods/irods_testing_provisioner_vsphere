@@ -1,0 +1,11 @@
+vm_cpu_count =
+vm_memory_MB =
+
+vsphere_cluster =
+vsphere_datastore =
+vsphere_deployment_folder =
+vsphere_host =
+vsphere_password_file =
+vsphere_username =
+
+template_identifier_dict =
