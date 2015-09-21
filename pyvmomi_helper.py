@@ -66,17 +66,13 @@ def wait_for_task(task, poll_period=2, raise_on_fail=False, msg=''):
             error_lines.append(task_state)
             error_lines.append(task.info.descriptionId)
             try:
-                error_lines.append(task.info.description.message)
+                error_lines.append(task.info.error.message)
             except AttributeError:
-                error_lines.append('task.info.description.message does not exist')
+                error_lines.append('task.info.error.message does not exist')
             try:
-                error_lines.append(task.info.error.localizedMessage)
+                error_lines.append(task.info.error.msg)
             except AttributeError:
-                error_lines.append('task.info.error.localizedMessage does not exist')
-            try:
-                error_lines.append(task.info.error.fault)
-            except AttributeError:
-                error_lines.append('task.info.error.fault does not exist')
+                error_lines.append('task.info.error.msg does not exist')
 
             error_str = '\n'.join(error_lines)
             raise VSphereError(error_str)
