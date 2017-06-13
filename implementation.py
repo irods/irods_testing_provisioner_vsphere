@@ -1,5 +1,6 @@
 from __future__ import print_function
 
+import ssl
 import sys
 import time
 
@@ -23,7 +24,8 @@ def deploy_vm_return_ip(vm_name, template_identifier):
 
     with pyvmomi_helper.HandlerServiceInstance(pyVim.connect.SmartConnect(host=configuration.vsphere_host,
                                                                        user=configuration.vsphere_username,
-                                                                       pwd=vsphere_password)) as si:
+                                                                       pwd=vsphere_password,
+                                                                       sslContext=ssl._create_unverified_context())) as si:
 
         content = si.RetrieveContent()
 
@@ -67,7 +69,8 @@ def destroy_vm(vm_name):
 
     with pyvmomi_helper.HandlerServiceInstance(pyVim.connect.SmartConnect(host=configuration.vsphere_host,
                                                                        user=configuration.vsphere_username,
-                                                                       pwd=vsphere_password)) as si:
+                                                                       pwd=vsphere_password,
+                                                                       sslContext=ssl._create_unverified_context())) as si:
 
         content = si.RetrieveContent()
         pyvmomi_helper.destroy_vm(pyvmomi_helper.get_obj(content, [pyVmomi.vim.VirtualMachine], vm_name))
